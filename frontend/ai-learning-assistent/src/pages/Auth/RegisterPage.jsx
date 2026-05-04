@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Eye, EyeOff, Mail, Lock, User, ArrowRight, Loader } from "lucide-react";
+import {
+  Eye,
+  EyeOff,
+  Mail,
+  Lock,
+  User,
+  ArrowRight,
+  Loader,
+} from "lucide-react";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -98,10 +106,10 @@ const RegisterPage = () => {
       // TODO: Replace with actual API call
       // const response = await authService.register(formData);
       console.log("Registration data:", formData);
-      
+
       // Simulate API delay
       await new Promise((resolve) => setTimeout(resolve, 1500));
-      
+
       navigate("/dashboard");
     } catch (error) {
       setErrors({
@@ -132,7 +140,10 @@ const RegisterPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-600 via-blue-500 to-purple-600 flex items-center justify-center p-4 sm:p-8">
       {/* Animated background elements */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-white opacity-5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-white opacity-5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2 animate-pulse" style={{ animationDelay: "1s" }}></div>
+      <div
+        className="absolute bottom-0 right-0 w-96 h-96 bg-white opacity-5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2 animate-pulse"
+        style={{ animationDelay: "1s" }}
+      ></div>
 
       <div className="w-full max-w-md relative z-10">
         {/* Header */}
@@ -175,7 +186,9 @@ const RegisterPage = () => {
                   placeholder="John"
                 />
                 {errors.firstName && touched.firstName && (
-                  <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.firstName}
+                  </p>
                 )}
               </div>
 
@@ -324,7 +337,9 @@ const RegisterPage = () => {
                 </button>
               </div>
               {errors.confirmPassword && touched.confirmPassword && (
-                <p className="text-red-500 text-xs mt-1">{errors.confirmPassword}</p>
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.confirmPassword}
+                </p>
               )}
             </div>
 

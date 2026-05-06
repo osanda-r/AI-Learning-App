@@ -46,18 +46,21 @@ const studyPlan = [
     detail: "15 min spaced repetition session",
     due: "Today",
     status: "Ready",
+    to: "/flashcards/biology-basics",
   },
   {
     title: "Take chapter quiz",
     detail: "12 questions, medium difficulty",
     due: "Tomorrow",
     status: "Scheduled",
+    to: "/quizzes/take",
   },
   {
     title: "Generate new flashcards",
     detail: "From the latest uploaded lecture",
     due: "Fri",
     status: "Pending",
+    to: "/documents/ai-ethics",
   },
 ];
 
@@ -66,16 +69,19 @@ const recentActivity = [
     title: "Uploaded Neural Networks.pdf",
     detail: "AI generated 18 flashcards from the document",
     time: "2 hours ago",
+    to: "/documents/ai-ethics",
   },
   {
     title: "Completed Biology Quiz 04",
     detail: "Scored 92% with 3 minutes remaining",
     time: "Yesterday",
+    to: "/quizzes/result",
   },
   {
     title: "Reviewed 40 flashcards",
     detail: "Strong recall on vocabulary and formulas",
     time: "2 days ago",
+    to: "/flashcards/biology-basics",
   },
 ];
 
@@ -268,9 +274,10 @@ const DashboardPage = () => {
 
             <div className="mt-6 space-y-4">
               {studyPlan.map((item) => (
-                <div
+                <Link
                   key={item.title}
-                  className="rounded-2xl border border-slate-200/80 bg-stone-50 p-4"
+                  to={item.to}
+                  className="rounded-2xl border border-slate-200/80 bg-stone-50 p-4 transition-transform hover:-translate-y-0.5 hover:shadow-sm"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div>
@@ -288,7 +295,7 @@ const DashboardPage = () => {
                   <div className="mt-3 inline-flex rounded-full bg-sky-50 px-3 py-1 text-xs font-semibold text-sky-700 ring-1 ring-sky-100">
                     {item.status}
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </article>
@@ -353,9 +360,10 @@ const DashboardPage = () => {
 
             <div className="mt-6 space-y-4">
               {recentActivity.map((activity) => (
-                <div
+                <Link
                   key={activity.title}
-                  className="flex gap-4 rounded-2xl border border-slate-200/80 bg-stone-50 p-4"
+                  to={activity.to}
+                  className="flex gap-4 rounded-2xl border border-slate-200/80 bg-stone-50 p-4 transition-transform hover:-translate-y-0.5 hover:shadow-sm"
                 >
                   <div className="mt-1 h-3 w-3 rounded-full bg-linear-to-br from-sky-400 to-emerald-400" />
                   <div className="min-w-0 flex-1">
@@ -373,7 +381,7 @@ const DashboardPage = () => {
                       </span>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </article>

@@ -101,7 +101,9 @@ const QuizeTakePage = () => {
                         }`}
                       >
                         <span>{option}</span>
-                        {selected && <CheckCircle2 className="h-4 w-4 text-sky-600" />}
+                        {selected && (
+                          <CheckCircle2 className="h-4 w-4 text-sky-600" />
+                        )}
                       </button>
                     );
                   })}

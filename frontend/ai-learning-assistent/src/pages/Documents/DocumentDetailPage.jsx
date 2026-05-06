@@ -1,4 +1,10 @@
-import { ArrowLeft, Brain, CheckCircle2, FileText, Sparkles } from "lucide-react";
+import {
+  ArrowLeft,
+  Brain,
+  CheckCircle2,
+  FileText,
+  Sparkles,
+} from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 
 const documentMap = {

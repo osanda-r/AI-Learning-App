@@ -45,7 +45,9 @@ const FlashCardListPage = () => {
               </p>
             </div>
             <div className="rounded-2xl bg-sky-50 px-5 py-4 ring-1 ring-sky-100">
-              <p className="text-sm font-medium text-slate-500">Ready for review</p>
+              <p className="text-sm font-medium text-slate-500">
+                Ready for review
+              </p>
               <p className="mt-1 text-3xl font-bold text-slate-900">14 decks</p>
             </div>
           </div>
@@ -111,7 +113,10 @@ const FlashCardListPage = () => {
               "Weak items are surfaced more often",
               "Progress stays visible across every session",
             ].map((item) => (
-              <div key={item} className="rounded-2xl bg-stone-50 p-4 text-sm text-slate-600 ring-1 ring-stone-200/80">
+              <div
+                key={item}
+                className="rounded-2xl bg-stone-50 p-4 text-sm text-slate-600 ring-1 ring-stone-200/80"
+              >
                 {item}
               </div>
             ))}

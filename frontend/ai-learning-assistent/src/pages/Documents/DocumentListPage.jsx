@@ -1,4 +1,11 @@
-import { ArrowRight, BookOpen, FileText, Search, Sparkles, Upload } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  FileText,
+  Search,
+  Sparkles,
+  Upload,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 
 const documents = [
@@ -111,7 +118,9 @@ const DocumentListPage = () => {
 
               <div className="mt-5 space-y-2">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="font-medium text-slate-600">Review progress</span>
+                  <span className="font-medium text-slate-600">
+                    Review progress
+                  </span>
                   <span className="font-semibold text-slate-900">
                     {document.progress}%
                   </span>

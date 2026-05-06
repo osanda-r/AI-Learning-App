@@ -1,4 +1,10 @@
-import { Bell, BookOpen, CircleUserRound, Settings, Trophy } from "lucide-react";
+import {
+  Bell,
+  BookOpen,
+  CircleUserRound,
+  Settings,
+  Trophy,
+} from "lucide-react";
 
 const profileStats = [
   { label: "Study streak", value: "12 days" },
@@ -17,7 +23,9 @@ const ProfilePage = () => {
                 <CircleUserRound className="h-10 w-10" />
               </div>
               <div>
-                <p className="text-sm font-medium text-sky-700">Student profile</p>
+                <p className="text-sm font-medium text-sky-700">
+                  Student profile
+                </p>
                 <h1 className="mt-1 text-4xl font-bold tracking-tight text-slate-900">
                   Alex Morgan
                 </h1>

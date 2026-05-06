@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import {
   Eye,
@@ -137,22 +137,22 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-blue-500 to-purple-600 flex items-center justify-center p-4 sm:p-8">
+    <div className="min-h-screen bg-linear-to-br from-stone-100 via-sky-50 to-emerald-50 flex items-center justify-center p-4 sm:p-8">
       {/* Animated background elements */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-white opacity-5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
+      <div className="absolute top-0 left-0 w-96 h-96 bg-sky-200 opacity-20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
       <div
-        className="absolute bottom-0 right-0 w-96 h-96 bg-white opacity-5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2 animate-pulse"
+        className="absolute bottom-0 right-0 w-96 h-96 bg-emerald-200 opacity-20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2 animate-pulse"
         style={{ animationDelay: "1s" }}
       ></div>
 
       <div className="w-full max-w-md relative z-10">
         {/* Header */}
         <div className="text-center mb-8 animate-fade-in">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-2xl mb-4 shadow-lg">
-            <User className="w-8 h-8 text-blue-600" />
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-white/90 rounded-2xl mb-4 shadow-lg">
+            <User className="w-8 h-8 text-sky-600" />
           </div>
           <h1 className="text-4xl font-bold text-white mb-2">Create Account</h1>
-          <p className="text-blue-100">Join our AI Learning community today</p>
+          <p className="text-slate-600">Join our AI Learning community today</p>
         </div>
 
         {/* Error Message */}
@@ -371,7 +371,7 @@ const RegisterPage = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 group"
+              className="w-full bg-linear-to-r from-sky-500 to-emerald-500 text-white font-semibold py-3 rounded-lg hover:from-sky-600 hover:to-emerald-600 transition-all duration-300 transform hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 group"
             >
               {loading ? (
                 <>
@@ -400,7 +400,7 @@ const RegisterPage = () => {
         </div>
 
         {/* Footer Info */}
-        <div className="mt-8 text-center text-blue-100 text-sm">
+        <div className="mt-8 text-center text-slate-600 text-sm">
           <p>🔒 Your data is secure and encrypted</p>
         </div>
       </div>

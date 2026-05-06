@@ -11,6 +11,7 @@ import {
   TrendingUp,
   Trophy,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const overviewStats = [
   {
@@ -113,20 +114,20 @@ const DashboardPage = () => {
               </div>
 
               <div className="flex flex-wrap gap-3">
-                <button
-                  type="button"
+                <Link
+                  to="/documents"
                   className="inline-flex items-center gap-2 rounded-xl bg-linear-to-r from-sky-500 to-emerald-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-200/60 transition-transform hover:scale-[1.02]"
                 >
                   <LayoutGrid className="h-4 w-4" />
                   Open workspace
-                </button>
-                <button
-                  type="button"
+                </Link>
+                <Link
+                  to="/profile"
                   className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50"
                 >
                   <TrendingUp className="h-4 w-4" />
                   View progress
-                </button>
+                </Link>
               </div>
             </div>
 

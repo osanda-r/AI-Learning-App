@@ -15,10 +15,12 @@ import QuizeTakePage from "./pages/Quizzes/QuizeTakePage";
 import QuizeResultPage from "./pages/Quizzes/QuizeResultPage";
 import ProfilePage from "./pages/Profile/ProfilePage";
 import NotFoundPage from "./pages/NotFoundPage";
+import Header from "./components/layout/Header";
 
 const App = () => {
   return (
     <Router>
+      <Header />
       <Routes>
         {/* Auth Routes */}
         <Route path="/login" element={<LoginPage />} />

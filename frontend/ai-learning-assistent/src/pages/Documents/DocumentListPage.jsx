@@ -7,8 +7,9 @@ import {
   Upload,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
 
-const documents = [
+const DEFAULT_DOCS = [
   {
     id: "ai-ethics",
     title: "AI Ethics and Society",
@@ -36,6 +37,49 @@ const documents = [
 ];
 
 const DocumentListPage = () => {
+  const [docs, setDocs] = useState(() => {
+    try {
+      const raw = localStorage.getItem("docs");
+      return raw ? JSON.parse(raw) : DEFAULT_DOCS;
+    } catch {
+      return DEFAULT_DOCS;
+    }
+  });
+
+  const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    localStorage.setItem("docs", JSON.stringify(docs));
+  }, [docs]);
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return docs;
+    return docs.filter(
+      (d) =>
+        d.title.toLowerCase().includes(q) ||
+        d.subject.toLowerCase().includes(q),
+    );
+  }, [docs, query]);
+
+  const handleUpload = (files) => {
+    if (!files || files.length === 0) return;
+    const file = files[0];
+    const newDoc = {
+      id: file.name
+        .replace(/\s+/g, "-")
+        .toLowerCase()
+        .replace(/[^a-z0-9-]/g, ""),
+      title: file.name.replace(/\.[^.]+$/, ""),
+      subject: "Uploaded",
+      pages: Math.max(1, Math.round((file.size || 1000) / 2000)),
+      updated: "Just now",
+      progress: 0,
+    };
+
+    setDocs((prev) => [newDoc, ...prev]);
+  };
+
   return (
     <div className="min-h-screen bg-linear-to-br from-stone-100 via-sky-50 to-emerald-50 text-slate-800">
       <main className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
@@ -55,30 +99,41 @@ const DocumentListPage = () => {
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-3">
-              <button
-                type="button"
-                className="inline-flex items-center gap-2 rounded-xl bg-linear-to-r from-sky-500 to-emerald-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-200/60"
-              >
+            <div className="flex flex-wrap items-center gap-3">
+              <label className="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-linear-to-r from-sky-500 to-emerald-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-200/60">
                 <Upload className="h-4 w-4" />
+                <input
+                  type="file"
+                  onChange={(e) => handleUpload(e.target.files)}
+                  className="sr-only"
+                />
                 Upload document
-              </button>
-              <button
-                type="button"
-                className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700"
-              >
-                <Search className="h-4 w-4" />
-                Search library
-              </button>
+              </label>
+
+              <div className="relative">
+                <input
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search documents"
+                  className="w-64 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm shadow-sm"
+                />
+                <div className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-slate-400">
+                  <Search className="h-4 w-4" />
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
         <section className="grid gap-4 sm:grid-cols-3">
           {[
-            { label: "Documents", value: "24" },
-            { label: "AI summaries", value: "18" },
-            { label: "Ready to review", value: "7" },
+            { label: "Documents", value: docs.length },
+            { label: "AI summaries", value: Math.max(0, docs.length - 6) },
+            {
+              label: "Ready to review",
+              value: docs.filter((d) => d.progress > 0 && d.progress < 100)
+                .length,
+            },
           ].map((item) => (
             <article
               key={item.label}
@@ -93,7 +148,7 @@ const DocumentListPage = () => {
         </section>
 
         <section className="grid gap-5 xl:grid-cols-3">
-          {documents.map((document) => (
+          {filtered.map((document) => (
             <article
               key={document.id}
               className="rounded-[1.75rem] border border-white/80 bg-white/85 p-6 shadow-sm backdrop-blur-sm"
@@ -135,8 +190,7 @@ const DocumentListPage = () => {
 
               <div className="mt-6 flex items-center justify-between">
                 <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-100">
-                  <Sparkles className="h-3.5 w-3.5" />
-                  AI ready
+                  <Sparkles className="h-3.5 w-3.5" /> AI ready
                 </span>
                 <Link
                   to={`/documents/${document.id}`}

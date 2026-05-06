@@ -1,7 +1,8 @@
 import { ArrowRight, Brain, Layers3, Sparkles } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-const flashcardDecks = [
+const DEFAULT_DECKS = [
   {
     id: "biology-basics",
     title: "Biology Basics",
@@ -26,6 +27,39 @@ const flashcardDecks = [
 ];
 
 const FlashCardListPage = () => {
+  const [decks, setDecks] = useState(() => {
+    try {
+      const raw = localStorage.getItem("decks");
+      return raw ? JSON.parse(raw) : DEFAULT_DECKS;
+    } catch {
+      return DEFAULT_DECKS;
+    }
+  });
+  const [newTitle, setNewTitle] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    localStorage.setItem("decks", JSON.stringify(decks));
+  }, [decks]);
+
+  const handleCreate = () => {
+    if (!newTitle.trim()) return;
+    const id = newTitle
+      .replace(/\s+/g, "-")
+      .toLowerCase()
+      .replace(/[^a-z0-9-]/g, "");
+    const deck = {
+      id,
+      title: newTitle.trim(),
+      cards: 0,
+      mastery: 0,
+      updated: "Just now",
+    };
+    setDecks((d) => [deck, ...d]);
+    setNewTitle("");
+    navigate(`/flashcards/${id}`);
+  };
+
   return (
     <div className="min-h-screen bg-linear-to-br from-stone-100 via-sky-50 to-emerald-50 text-slate-800">
       <main className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
@@ -44,17 +78,37 @@ const FlashCardListPage = () => {
                 review sessions light and focused.
               </p>
             </div>
-            <div className="rounded-2xl bg-sky-50 px-5 py-4 ring-1 ring-sky-100">
-              <p className="text-sm font-medium text-slate-500">
-                Ready for review
-              </p>
-              <p className="mt-1 text-3xl font-bold text-slate-900">14 decks</p>
+
+            <div className="flex items-center gap-3">
+              <div className="rounded-2xl bg-sky-50 px-5 py-4 ring-1 ring-sky-100">
+                <p className="text-sm font-medium text-slate-500">
+                  Ready for review
+                </p>
+                <p className="mt-1 text-3xl font-bold text-slate-900">
+                  {decks.length} decks
+                </p>
+              </div>
+
+              <div className="ml-2 flex items-center gap-2">
+                <input
+                  value={newTitle}
+                  onChange={(e) => setNewTitle(e.target.value)}
+                  placeholder="New deck title"
+                  className="rounded-xl border border-slate-200 px-3 py-2 text-sm"
+                />
+                <button
+                  onClick={handleCreate}
+                  className="rounded-xl bg-linear-to-r from-sky-500 to-emerald-500 px-4 py-2 text-sm font-semibold text-white"
+                >
+                  Create
+                </button>
+              </div>
             </div>
           </div>
         </section>
 
         <section className="mt-6 grid gap-5 lg:grid-cols-3">
-          {flashcardDecks.map((deck) => (
+          {decks.map((deck) => (
             <article
               key={deck.id}
               className="rounded-[1.75rem] border border-white/80 bg-white/85 p-6 shadow-sm backdrop-blur-sm"

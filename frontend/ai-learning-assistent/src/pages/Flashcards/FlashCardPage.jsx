@@ -2,7 +2,7 @@ import { ArrowLeft, ArrowRight, RefreshCcw, RotateCcw } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 
-const deckCards = [
+const SAMPLE = [
   {
     front: "What is supervised learning?",
     back: "A training approach where labeled examples guide the model toward the correct output.",
@@ -21,17 +21,33 @@ const FlashCardPage = () => {
   const { deckId } = useParams();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
+  const [cards] = useState(() => {
+    try {
+      const raw = localStorage.getItem("decks");
+      if (raw) {
+        const decks = JSON.parse(raw);
+        const deck = decks.find((d) => d.id === deckId);
+        if (deck) {
+          const stored = localStorage.getItem(`deck:${deckId}`);
+          return stored ? JSON.parse(stored) : SAMPLE;
+        }
+      }
+    } catch {
+      // ignore
+    }
+    return SAMPLE;
+  });
 
-  const currentCard = deckCards[currentIndex];
+  const currentCard = cards[currentIndex];
 
   const handleNext = () => {
     setFlipped(false);
-    setCurrentIndex((prev) => (prev + 1) % deckCards.length);
+    setCurrentIndex((prev) => (prev + 1) % cards.length);
   };
 
   const handlePrevious = () => {
     setFlipped(false);
-    setCurrentIndex((prev) => (prev - 1 + deckCards.length) % deckCards.length);
+    setCurrentIndex((prev) => (prev - 1 + cards.length) % cards.length);
   };
 
   return (
@@ -54,7 +70,7 @@ const FlashCardPage = () => {
               </h1>
             </div>
             <div className="rounded-2xl bg-sky-50 px-4 py-3 text-sm font-semibold text-sky-700 ring-1 ring-sky-100">
-              Card {currentIndex + 1} of {deckCards.length}
+              Card {currentIndex + 1} of {cards.length}
             </div>
           </div>
 

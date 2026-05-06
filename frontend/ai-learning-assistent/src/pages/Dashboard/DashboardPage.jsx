@@ -257,9 +257,7 @@ const DashboardPage = () => {
           <article className="rounded-[1.75rem] border border-white/80 bg-white/85 p-6 shadow-sm backdrop-blur-sm">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <h2 className="text-xl font-bold text-slate-900">
-                  Study plan
-                </h2>
+                <h2 className="text-xl font-bold text-slate-900">Study plan</h2>
                 <p className="mt-1 text-sm text-slate-500">
                   What you should tackle next.
                 </p>

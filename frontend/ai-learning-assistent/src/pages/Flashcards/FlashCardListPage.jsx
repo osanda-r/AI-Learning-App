@@ -27,6 +27,7 @@ const DEFAULT_DECKS = [
 ];
 
 const FlashCardListPage = () => {
+  // Hydrate the deck list from localStorage so decks persist across reloads.
   const [decks, setDecks] = useState(() => {
     try {
       const raw = localStorage.getItem("decks");
@@ -38,10 +39,12 @@ const FlashCardListPage = () => {
   const [newTitle, setNewTitle] = useState("");
   const navigate = useNavigate();
 
+  // Keep the latest deck list in localStorage whenever it changes.
   useEffect(() => {
     localStorage.setItem("decks", JSON.stringify(decks));
   }, [decks]);
 
+  // Create a new deck, add it to the top of the list, and open it immediately.
   const handleCreate = () => {
     if (!newTitle.trim()) return;
     const id = newTitle
@@ -63,7 +66,7 @@ const FlashCardListPage = () => {
   return (
     <div className="min-h-screen bg-linear-to-br from-stone-100 via-sky-50 to-emerald-50 text-slate-800">
       <main className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
-        <section className="rounded-[2rem] border border-white/80 bg-white/85 p-6 shadow-sm backdrop-blur-sm sm:p-8">
+        <section className="rounded-4xl border border-white/80 bg-white/85 p-6 shadow-sm backdrop-blur-sm sm:p-8">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
             <div className="space-y-3">
               <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 ring-1 ring-emerald-100">

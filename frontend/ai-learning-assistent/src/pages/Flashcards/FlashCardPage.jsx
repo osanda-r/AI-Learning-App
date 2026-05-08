@@ -21,6 +21,7 @@ const FlashCardPage = () => {
   const { deckId } = useParams();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
+  // Load the deck from localStorage when it exists, otherwise fall back to sample cards.
   const [cards] = useState(() => {
     try {
       const raw = localStorage.getItem("decks");
@@ -40,11 +41,13 @@ const FlashCardPage = () => {
 
   const currentCard = cards[currentIndex];
 
+  // Advance to the next card and always reset the card back to the front side.
   const handleNext = () => {
     setFlipped(false);
     setCurrentIndex((prev) => (prev + 1) % cards.length);
   };
 
+  // Move backward through the deck while keeping the flip state consistent.
   const handlePrevious = () => {
     setFlipped(false);
     setCurrentIndex((prev) => (prev - 1 + cards.length) % cards.length);
@@ -61,7 +64,7 @@ const FlashCardPage = () => {
           Back to decks
         </Link>
 
-        <section className="rounded-[2rem] border border-white/80 bg-white/85 p-6 shadow-sm backdrop-blur-sm sm:p-8">
+        <section className="rounded-4xl border border-white/80 bg-white/85 p-6 shadow-sm backdrop-blur-sm sm:p-8">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-sm font-medium text-sky-700">Deck {deckId}</p>
@@ -78,7 +81,7 @@ const FlashCardPage = () => {
             <button
               type="button"
               onClick={() => setFlipped((prev) => !prev)}
-              className="flex min-h-[360px] items-center justify-center rounded-[2rem] border border-slate-200 bg-linear-to-br from-white to-stone-50 px-6 py-8 text-left shadow-sm transition-transform hover:scale-[1.01]"
+              className="flex min-h-90 items-center justify-center rounded-4xl border border-slate-200 bg-linear-to-br from-white to-stone-50 px-6 py-8 text-left shadow-sm transition-transform hover:scale-[1.01]"
             >
               <div className="max-w-xl space-y-6">
                 <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-100">
@@ -96,7 +99,7 @@ const FlashCardPage = () => {
               </div>
             </button>
 
-            <aside className="space-y-4 rounded-[2rem] border border-white/80 bg-white/85 p-6 shadow-sm backdrop-blur-sm">
+            <aside className="space-y-4 rounded-4xl border border-white/80 bg-white/85 p-6 shadow-sm backdrop-blur-sm">
               <div className="rounded-2xl bg-sky-50 p-4 ring-1 ring-sky-100">
                 <p className="text-sm text-slate-500">Session progress</p>
                 <p className="mt-2 text-3xl font-bold text-slate-900">67%</p>

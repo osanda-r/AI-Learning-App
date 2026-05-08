@@ -101,7 +101,8 @@ const DashboardPage = () => {
       </div>
 
       <main className="relative mx-auto flex w-full max-w-7xl flex-col gap-8 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
-        <section className="overflow-hidden rounded-[2rem] border border-white/70 bg-white/80 shadow-[0_30px_80px_-30px_rgba(36,50,68,0.35)] backdrop-blur-sm">
+        {/* Top summary card for the main dashboard overview. */}
+        <section className="overflow-hidden rounded-4xl border border-white/70 bg-white/80 shadow-[0_30px_80px_-30px_rgba(36,50,68,0.35)] backdrop-blur-sm">
           <div className="grid gap-8 px-6 py-8 lg:grid-cols-[1.25fr_0.75fr] lg:px-10 lg:py-10">
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-semibold text-sky-700">
@@ -209,6 +210,7 @@ const DashboardPage = () => {
         </section>
 
         <section className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          {/* Progress cards keep the current study momentum visible. */}
           <article className="rounded-[1.75rem] border border-white/80 bg-white/85 p-6 shadow-sm backdrop-blur-sm">
             <div className="flex items-center justify-between gap-4">
               <div>
@@ -261,6 +263,7 @@ const DashboardPage = () => {
             </div>
           </article>
 
+          {/* Action list points the user to the next best study task. */}
           <article className="rounded-[1.75rem] border border-white/80 bg-white/85 p-6 shadow-sm backdrop-blur-sm">
             <div className="flex items-center justify-between gap-4">
               <div>

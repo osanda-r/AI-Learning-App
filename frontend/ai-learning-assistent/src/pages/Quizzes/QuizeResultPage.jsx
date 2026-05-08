@@ -9,6 +9,7 @@ const defaultResult = {
 
 const QuizeResultPage = () => {
   const location = useLocation();
+  // Use the navigation state when available, otherwise show a default demo result.
   const result = location.state ?? defaultResult;
 
   return (
@@ -22,7 +23,7 @@ const QuizeResultPage = () => {
           Back to quiz
         </Link>
 
-        <section className="rounded-[2rem] border border-white/80 bg-white/85 p-6 shadow-sm backdrop-blur-sm sm:p-8">
+        <section className="rounded-4xl border border-white/80 bg-white/85 p-6 shadow-sm backdrop-blur-sm sm:p-8">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl space-y-4">
               <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 ring-1 ring-emerald-100">
@@ -48,6 +49,7 @@ const QuizeResultPage = () => {
             </div>
           </div>
 
+          {/* These follow-up actions turn the score into the next study step. */}
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {[
               "Revisit every question you missed",

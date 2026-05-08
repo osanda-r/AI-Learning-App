@@ -32,11 +32,13 @@ const QuizeTakePage = () => {
   const navigate = useNavigate();
   const [answers, setAnswers] = useState(Array(questions.length).fill(null));
 
+  // Track how many questions the user has answered so far.
   const answeredCount = useMemo(
     () => answers.filter((answer) => answer !== null).length,
     [answers],
   );
 
+  // Score the quiz locally and send the result page a summary payload.
   const handleSubmit = () => {
     const score = answers.reduce((total, answer, index) => {
       return total + (answer === questions[index].answer ? 1 : 0);
@@ -54,7 +56,7 @@ const QuizeTakePage = () => {
   return (
     <div className="min-h-screen bg-linear-to-br from-stone-100 via-sky-50 to-emerald-50 text-slate-800">
       <main className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
-        <section className="rounded-[2rem] border border-white/80 bg-white/85 p-6 shadow-sm backdrop-blur-sm sm:p-8">
+        <section className="rounded-4xl border border-white/80 bg-white/85 p-6 shadow-sm backdrop-blur-sm sm:p-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 px-4 py-2 text-sm font-semibold text-amber-700 ring-1 ring-amber-100">
@@ -70,6 +72,7 @@ const QuizeTakePage = () => {
             </div>
           </div>
 
+          {/* Each question is rendered as a self-contained answer group. */}
           <div className="mt-8 space-y-5">
             {questions.map((question, questionIndex) => (
               <article

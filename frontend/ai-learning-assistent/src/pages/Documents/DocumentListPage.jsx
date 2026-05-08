@@ -48,10 +48,12 @@ const DocumentListPage = () => {
 
   const [query, setQuery] = useState("");
 
+  // Persist the current document list so uploads survive a refresh.
   useEffect(() => {
     localStorage.setItem("docs", JSON.stringify(docs));
   }, [docs]);
 
+  // Filter visible cards by title or subject.
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return docs;
@@ -62,6 +64,7 @@ const DocumentListPage = () => {
     );
   }, [docs, query]);
 
+  // Turn the uploaded file into a lightweight document card.
   const handleUpload = (files) => {
     if (!files || files.length === 0) return;
     const file = files[0];
@@ -83,7 +86,7 @@ const DocumentListPage = () => {
   return (
     <div className="min-h-screen bg-linear-to-br from-stone-100 via-sky-50 to-emerald-50 text-slate-800">
       <main className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
-        <section className="rounded-[2rem] border border-white/80 bg-white/85 p-6 shadow-sm backdrop-blur-sm sm:p-8">
+        <section className="rounded-3xl border border-white/80 bg-white/85 p-6 shadow-sm backdrop-blur-sm sm:p-8">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="space-y-3">
               <div className="inline-flex items-center gap-2 rounded-full bg-sky-50 px-4 py-2 text-sm font-semibold text-sky-700 ring-1 ring-sky-100">
@@ -147,6 +150,7 @@ const DocumentListPage = () => {
           ))}
         </section>
 
+        {/* Each card summarizes one document and links into its detail view. */}
         <section className="grid gap-5 xl:grid-cols-3">
           {filtered.map((document) => (
             <article

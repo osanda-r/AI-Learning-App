@@ -5,7 +5,8 @@ const NotFoundPage = () => {
   return (
     <div className="min-h-screen bg-linear-to-br from-stone-100 via-sky-50 to-emerald-50 text-slate-800">
       <main className="mx-auto flex min-h-screen w-full max-w-4xl items-center px-4 py-10 sm:px-6 lg:px-8">
-        <section className="w-full rounded-[2rem] border border-white/80 bg-white/85 p-8 text-center shadow-sm backdrop-blur-sm sm:p-10">
+        {/* Keep the fallback screen simple so users can recover quickly. */}
+        <section className="w-full rounded-4xl border border-white/80 bg-white/85 p-8 text-center shadow-sm backdrop-blur-sm sm:p-10">
           <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-sky-50 text-sky-600 ring-1 ring-sky-100">
             <Compass className="h-8 w-8" />
           </div>

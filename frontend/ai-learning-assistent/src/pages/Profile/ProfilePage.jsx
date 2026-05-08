@@ -16,7 +16,8 @@ const ProfilePage = () => {
   return (
     <div className="min-h-screen bg-linear-to-br from-stone-100 via-sky-50 to-emerald-50 text-slate-800">
       <main className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
-        <section className="rounded-[2rem] border border-white/80 bg-white/85 p-6 shadow-sm backdrop-blur-sm sm:p-8">
+        {/* Profile header and actions stay fixed at the top for quick editing. */}
+        <section className="rounded-3xl border border-white/80 bg-white/85 p-6 shadow-sm backdrop-blur-sm sm:p-8">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-center gap-4">
               <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-linear-to-br from-sky-500 to-emerald-500 text-white shadow-lg shadow-sky-200/60">
@@ -69,6 +70,7 @@ const ProfilePage = () => {
         </section>
 
         <section className="mt-6 grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+          {/* Milestones capture the learning history that motivates the user. */}
           <article className="rounded-[1.75rem] border border-white/80 bg-white/85 p-6 shadow-sm backdrop-blur-sm">
             <div className="flex items-center gap-2 text-slate-900">
               <Trophy className="h-5 w-5 text-amber-500" />
@@ -90,6 +92,7 @@ const ProfilePage = () => {
             </div>
           </article>
 
+          {/* Preferences show which study defaults are currently enabled. */}
           <article className="rounded-[1.75rem] border border-white/80 bg-white/85 p-6 shadow-sm backdrop-blur-sm">
             <div className="flex items-center gap-2 text-slate-900">
               <BookOpen className="h-5 w-5 text-sky-600" />

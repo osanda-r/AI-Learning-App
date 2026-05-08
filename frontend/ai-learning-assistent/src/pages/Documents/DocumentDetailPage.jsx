@@ -30,6 +30,7 @@ const documentMap = {
 
 const DocumentDetailPage = () => {
   const { documentId } = useParams();
+  // Fall back to a known document when the route points at an unknown ID.
   const document = documentMap[documentId] ?? documentMap["ai-ethics"];
 
   return (
@@ -43,7 +44,7 @@ const DocumentDetailPage = () => {
           Back to documents
         </Link>
 
-        <section className="mt-6 rounded-[2rem] border border-white/80 bg-white/85 p-6 shadow-sm backdrop-blur-sm sm:p-8">
+        <section className="mt-6 rounded-4xl border border-white/80 bg-white/85 p-6 shadow-sm backdrop-blur-sm sm:p-8">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-3xl space-y-4">
               <div className="inline-flex items-center gap-2 rounded-full bg-sky-50 px-4 py-2 text-sm font-semibold text-sky-700 ring-1 ring-sky-100">
@@ -78,6 +79,7 @@ const DocumentDetailPage = () => {
             </div>
           </div>
 
+          {/* The left side explains the AI-generated summary and the right side offers shortcuts. */}
           <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_0.8fr]">
             <article className="rounded-[1.5rem] bg-stone-50 p-6 ring-1 ring-stone-200/80">
               <div className="flex items-center gap-2 text-slate-900">
